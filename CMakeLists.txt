@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.3)
 PROJECT(JammyChatServer VERSION 1.0 LANGUAGES CXX)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(RESOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/resource)
 message(STATUS "RESOURCE_DIR = ${RESOURCE_DIR}")
 
@@ -52,6 +52,7 @@ add_executable(
 
         # ${${PROJECT_NAME}_protocc_src}  grpc proto生成的cc文件以静态库形式链接，这里不需要了
 )
+find_package(spdlog REQUIRED)
 
 
 # 链接proto和hiredis库mysql库
@@ -61,6 +62,7 @@ target_link_libraries(
         ${PROJECT_NAME}_proto 
         ${HIREDIS_LIB} 
         mysqlcppconn
+        spdlog::spdlog
 ) #mysql连接支持
 
 
